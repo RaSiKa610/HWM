@@ -10,11 +10,15 @@
 <body>
     <header>
         <nav>
-            <div class="logo" onclick="window.location.href='index.html'">☕ Civic Chai</div>
+            <div class="logo" onclick="window.location.href='index.html'">
+                <img src="logo.png" alt="Civic Chai" class="logo-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                <span class="logo-text">☕ Civic Chai</span>
+            </div>
             <ul id="nav-menu">
                 <li><a href="#how-it-works">How It Works</a></li>
                 <li><a href="#philosophy">Philosophy</a></li>
                 <li><a href="#stakeholders">Who It's For</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
                 <li><a href="report.html" class="cta-btn">Report Issue</a></li>
             </ul>
             <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
@@ -300,7 +304,7 @@
     <footer>
         <div class="footer-content">
             <div class="footer-about">
-                <h3>☕ Civic Chai</h3>
+                <h3 style="display: flex; align-items: center; gap: 0.5rem;"><img src="logo.png" alt="" style="height: 30px; width: auto;" onerror="this.style.display='none'">Civic Chai</h3>
                 <p>A civic incident management platform that enables citizens to report public issues quickly while automatically prioritizing them based on real-world criticality.</p>
             </div>
             <div class="footer-section">
