@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Gallery - Civic Chai</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .gallery-header {
+            background: linear-gradient(135deg, var(--chai-brown) 0%, var(--chai-dark) 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .gallery-filters {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .filter-btn {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--chai-cream);
+            background: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            color: var(--chai-dark);
+        }
+        
+        .filter-btn.active {
+            background: var(--chai-orange);
+            color: white;
+            border-color: var(--chai-orange);
+        }
+        
+        .filter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-soft);
+        }
+        
+        .gallery-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .gallery-item {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .image-container {
+            position: relative;
+            height: 300px;
+            background: #f5f5f5;
+        }
+        
+        .before-after-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            height: 100%;
+        }
+        
+        .before-img, .after-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .image-label {
+            position: absolute;
+            top: 1rem;
+            padding: 0.4rem 1rem;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 15px;
+        }
+        
+        .before-label {
+            left: 1rem;
+        }
+        
+        .after-label {
+            right: 1rem;
+        }
+        
+        .item-details {
+            padding: 1.5rem;
+        }
+        
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+        
+        .item-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            color: var(--chai-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .item-location {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .item-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--chai-cream);
+        }
+        
+        .time-badge {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+        
+        /* Kulhad Rating System */
+        .kulhad-rating {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .kulhad-container {
+            position: relative;
+            width: 60px;
+            height: 70px;
+            cursor: pointer;
+        }
+        
+        .kulhad-glass {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 60px;
+        }
+        
+        .kulhad-fill {
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 44px;
+            transition: height 0.5s ease, background 0.3s;
+            border-radius: 0 0 8px 8px;
+        }
+        
+        .kulhad-fill.kadwi {
+            height: 15px;
+            background: linear-gradient(to top, #DC2626, #EF4444);
+        }
+        
+        .kulhad-fill.theek-thak {
+            height: 30px;
+            background: linear-gradient(to top, #F59E0B, #FBBF24);
+        }
+        
+        .kulhad-fill.kadak {
+            height: 50px;
+            background: linear-gradient(to top, #6B4423, #D97706);
+        }
+        
+        .kulhad-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--chai-dark);
+            text-align: center;
+        }
+        
+        .rating-stats {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+        
+        /* Interactive Kulhad Rating */
+        .rate-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .rate-modal.active {
+            display: flex;
+        }
+        
+        .rate-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+        }
+        
+        .kulhad-options {
+            display: flex;
+            justify-content: space-around;
+            margin: 2rem 0;
+        }
+        
+        .kulhad-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            padding: 1rem;
+            border-radius: 15px;
+            transition: all 0.3s;
+        }
+        
+        .kulhad-option:hover {
+            background: var(--chai-light);
+            transform: scale(1.05);
+        }
+        
+        .kulhad-option.selected {
+            background: linear-gradient(135deg, #FFF8F0, #F5E6D3);
+            border: 2px solid var(--chai-orange);
+        }
+        
+        .large-kulhad {
+            width: 80px;
+            height: 90px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .kulhad-image {
+            width: 80px;
+            height: 90px;
+            object-fit: contain;
+        }
+        
+        .stats-bar {
+            background: var(--chai-light);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            text-align: center;
+        }
+        
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            font-family: 'Poppins', sans-serif;
+            color: var(--chai-orange);
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo" onclick="window.location.href='index.html'">
+                <img src="logo.png" alt="Civic Chai" class="logo-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                <span class="logo-text">☕ Civic Chai</span>
+            </div>
+            <ul id="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html" class="active">Gallery</a></li>
+                <li><a href="analytics.html">Analytics</a></li>
+                <li><a href="report.html" class="cta-btn">Report Issue</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
+        </nav>
+    </header>
+
+    <div class="gallery-header">
+        <h1 style="font-family: 'Poppins', sans-serif; font-size: 3rem; margin-bottom: 1rem;">
+            Public Gallery
+        </h1>
+        <p style="font-size: 1.2rem; opacity: 0.9;">
+            See how civic issues are being resolved across Mumbai
+        </p>
+        <p style="font-size: 1rem; opacity: 0.8; margin-top: 0.5rem;">
+            Rate the work quality using our Kulhad Rating System ☕
+        </p>
+    </div>
+
+    <div class="stats-bar" style="max-width: 1200px; margin: 2rem auto;">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">247</div>
+                <div class="stat-label">Total Resolved</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">89%</div>
+                <div class="stat-label">With Photos</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">1,523</div>
+                <div class="stat-label">Citizen Ratings</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">4.2</div>
+                <div class="stat-label">Avg Quality</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="gallery-filters">
+        <button class="filter-btn active" onclick="filterGallery('all')">All Issues</button>
+        <button class="filter-btn" onclick="filterGallery('critical')"> Critical</button>
+        <button class="filter-btn" onclick="filterGallery('high')"> High</button>
+        <button class="filter-btn" onclick="filterGallery('medium')"> Medium</button>
+        <button class="filter-btn" onclick="filterGallery('low')"> Low</button>
+        <button class="filter-btn" onclick="filterGallery('kadak')">☕ Kadak Chai (5★)</button>
+        <button class="filter-btn" onclick="filterGallery('recent')">📅 Last 7 Days</button>
+    </div>
+
+    <div class="gallery-grid" id="gallery-grid">
+        <!-- Sample Gallery Items -->
+        <div class="gallery-item" data-priority="critical" data-rating="kadak">
+            <div class="image-container">
+                <div class="before-after-wrapper">
+                    <div style="position: relative;">
+                        <img src="https://via.placeholder.com/350x300/DC2626/FFFFFF?text=Sewage+Overflow" alt="Before" class="before-img">
+                        <span class="image-label before-label">BEFORE</span>
+                    </div>
+                    <div style="position: relative;">
+                        <img src="https://via.placeholder.com/350x300/10B981/FFFFFF?text=Fixed+%26+Clean" alt="After" class="after-img">
+                        <span class="image-label after-label">AFTER</span>
+                    </div>
+                </div>
+            </div>
+            <div class="item-details">
+                <div class="item-header">
+                    <div>
+                        <h3 class="item-title">Sewage Overflow Fixed</h3>
+                        <p class="item-location">📍 MG Road, Andheri West</p>
+                    </div>
+                    <span class="priority-badge badge-critical"> Critical</span>
+                </div>
+                <p style="color: var(--text-light); font-size: 0.95rem; margin-top: 0.5rem;">
+                    Major sewage overflow near residential area cleaned within 6 hours
+                </p>
+                <div class="item-meta">
+                    <span class="time-badge">⏱️ Fixed in 6 hours</span>
+                    <div class="kulhad-rating" onclick="openRatingModal('issue-1')">
+                        <div class="kulhad-container">
+                            <img src="kulhad-kadak.png" alt="Kadak Chai" class="kulhad-image"
+                             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2290%22 viewBox=%220 0 50 60%22%3E%3Cpath d=%22M 10 5 Q 10 0, 15 0 L 35 0 Q 40 0, 40 5 L 45 55 Q 45 60, 40 60 L 10 60 Q 5 60, 5 55 Z%22 fill=%22none%22 stroke=%22%238B4513%22 stroke-width=%222.5%22/%3E%3Cellipse cx=%2225%22 cy=%223%22 rx=%2210%22 ry=%222%22 fill=%22none%22 stroke=%22%238B4513%22 stroke-width=%222%22/%3E%3Crect x=%227%22 y=%2210%22 width=%2236%22 height=%2250%22 fill=%22%236B4423%22 opacity=%220.7%22/%3E%3C/svg%3E'">
+                            
+                        </div>
+                        <div class="kulhad-label">Kadak Chai</div>
+                        <div class="rating-stats">⭐ 4.8 (127 ratings)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="gallery-item" data-priority="high" data-rating="theek-thak">
+            <div class="image-container">
+                <div class="before-after-wrapper">
+                    <div style="position: relative;">
+                        <img src="https://via.placeholder.com/350x300/F97316/FFFFFF?text=Broken+Light" alt="Before" class="before-img">
+                        <span class="image-label before-label">BEFORE</span>
+                    </div>
+                    <div style="position: relative;">
+                        <img src="https://via.placeholder.com/350x300/10B981/FFFFFF?text=Light+Working" alt="After" class="after-img">
+                        <span class="image-label after-label">AFTER</span>
+                    </div>
+                </div>
+            </div>
+            <div class="item-details">
+                <div class="item-header">
+                    <div>
+                        <h3 class="item-title">Streetlight Repaired</h3>
+                        <p class="item-location">📍 SV Road, Bandra</p>
+                    </div>
+                    <span class="priority-badge badge-high"> High</span>
+                </div>
+                <p style="color: var(--text-light); font-size: 0.95rem; margin-top: 0.5rem;">
+                    Non-functional streetlight on main road replaced
+                </p>
+                <div class="item-meta">
+                    <span class="time-badge">⏱️ Fixed in 18 hours</span>
+                    <div class="kulhad-rating" onclick="openRatingModal('issue-2')">
+                        <div class="kulhad-container">
+                            <img src="kulhad-theek-thak.png" alt="Theek-Thak" class="kulhad-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2290%22 viewBox=%220 0 50 60%22%3E%3Cpath d=%22M 10 5 Q 10 0, 15 0 L 35 0 Q 40 0, 40 5 L 45 55 Q 45 60, 40 60 L 10 60 Q 5 60, 5 55 Z%22 fill=%22none%22 stroke=%22%238B4513%22 stroke-width=%222.5%22/%3E%3Cellipse cx=%2225%22 cy=%223%22 rx=%2210%22 ry=%222%22 fill=%22none%22 stroke=%22%238B4513%22 stroke-width=%222%22/%3E%3Crect x=%227%22 y=%2230%22 width=%2236%22 height=%2230%22 fill=%22%23F59E0B%22 opacity=%220.7%22/%3E%3C/svg%3E'">
+                        </div>
+                        <div class="kulhad-label">Theek-Thak</div>
+                        <div class="rating-stats">⭐ 3.5 (89 ratings)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="gallery-item" data-priority="medium" data-rating="kadak">
+            <div class="image-container">
+                <div class="before-after-wrapper">
+                    <div style="position: relative;">
+                        <img src="https://via.placeholder.com/350x300/FBBF24/000000?text=Pothole" alt="Before" class="before-img">
+                        <span class="image-label before-label">BEFORE</span>
+                    </div>
+                    <div style="position: relative;">
+                        <img src="https://via.placeholder.com/350x300/10B981/FFFFFF?text=Road+Repaired" alt="After" class="after-img">
+                        <span class="image-label after-label">AFTER</span>
+                    </div>
+                </div>
+            </div>
+            <div class="item-details">
+                <div class="item-header">
+                    <div>
+                        <h3 class="item-title">Pothole Filled</h3>
+                        <p class="item-location">📍 Hill Road, Bandra West</p>
+                    </div>
+                    <span class="priority-badge badge-medium"> Medium</span>
+                </div>
+                <p style="color: var(--text-light); font-size: 0.95rem; margin-top: 0.5rem;">
+                    Large pothole on residential street properly filled and leveled
+                </p>
+                <div class="item-meta">
+                    <span class="time-badge">⏱️ Fixed in 2 days</span>
+                    <div class="kulhad-rating" onclick="openRatingModal('issue-3')">
+                        <div class="kulhad-container">
+                            <img src="kulhad-theek-thak.png" alt="Theek-Thak" class="kulhad-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2290%22 viewBox=%220 0 50 60%22%3E%3Cpath d=%22M 10 5 Q 10 0, 15 0 L 35 0 Q 40 0, 40 5 L 45 55 Q 45 60, 40 60 L 10 60 Q 5 60, 5 55 Z%22 fill=%22none%22 stroke=%22%238B4513%22 stroke-width=%222.5%22/%3E%3Cellipse cx=%2225%22 cy=%223%22 rx=%2210%22 ry=%222%22 fill=%22none%22 stroke=%22%238B4513%22 stroke-width=%222%22/%3E%3Crect x=%227%22 y=%2230%22 width=%2236%22 height=%2230%22 fill=%22%23F59E0B%22 opacity=%220.7%22/%3E%3C/svg%3E'">
+                        </div>
+                        <div class="kulhad-label">Kadak Chai</div>
+                        <div class="rating-stats">⭐ 4.6 (93 ratings)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="gallery-item" data-priority="low" data-rating="kadwi">
+            <div class="image-container">
+                <div class="before-after-wrapper">
+                    <div style="position: relative;">
+                        <img src="https://via.placeholder.com/350x300/10B981/FFFFFF?text=Graffiti+Wall" alt="Before" class="before-img">
+                        <span class="image-label before-label">BEFORE</span>
+                    </div>
+                    <div style="position: relative;">
+                        <img src="https://via.placeholder.com/350x300/DC2626/FFFFFF?text=Still+Dirty" alt="After" class="after-img">
+                        <span class="image-label after-label">AFTER</span>
+                    </div>
+                </div>
+            </div>
+            <div class="item-details">
+                <div class="item-header">
+                    <div>
+                        <h3 class="item-title">Graffiti Cleaning - Poor Job</h3>
+                        <p class="item-location">📍 Carter Road, Bandra</p>
+                    </div>
+                    <span class="priority-badge badge-low"> Low</span>
+                </div>
+                <p style="color: var(--text-light); font-size: 0.95rem; margin-top: 0.5rem;">
+                    Incomplete cleaning, marks still visible
+                </p>
+                <div class="item-meta">
+                    <span class="time-badge">⏱️ Attempted in 5 days</span>
+                    <div class="kulhad-rating" onclick="openRatingModal('issue-4')">
+                        <div class="kulhad-container">
+                            <img src="kulhad-kadwi.png" alt="Kadwi Chai" class="kulhad-image" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2290%22 viewBox=%220 0 50 60%22%3E%3Cpath d=%22M 10 5 Q 10 0, 15 0 L 35 0 Q 40 0, 40 5 L 45 55 Q 45 60, 40 60 L 10 60 Q 5 60, 5 55 Z%22 fill=%22none%22 stroke=%22%238B4513%22 stroke-width=%222.5%22/%3E%3Cellipse cx=%2225%22 cy=%223%22 rx=%2210%22 ry=%222%22 fill=%22none%22 stroke=%22%238B4513%22 stroke-width=%222%22/%3E%3Crect x=%227%22 y=%2245%22 width=%2236%22 height=%2215%22 fill=%22%23DC2626%22 opacity=%220.7%22/%3E%3C/svg%3E'">
+                        </div>
+                        <div class="kulhad-label">Kadwi Chai</div>
+                        <div class="rating-stats">⭐ 1.8 (64 ratings)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rating Modal -->
+    <div id="rate-modal" class="rate-modal">
+        <div class="rate-content">
+            <h2 style="font-family: 'Poppins', sans-serif; color: var(--chai-dark); margin-bottom: 1rem; text-align: center;">
+                Rate This Work Quality
+            </h2>
+            <p style="color: var(--text-light); text-align: center; margin-bottom: 2rem;">
+                How would you rate this civic work? Choose your Kulhad rating
+            </p>
+            
+            <div class="kulhad-options">
+                <div class="kulhad-option" onclick="selectRating('kadwi')">
+                    <div class="large-kulhad">
+                        <img src="kulhad-kadwi.png" alt="Kadwi Chai" class="kulhad-image" 
+                             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2290%22 viewBox=%220 0 50 60%22%3E%3Cpath d=%22M 10 5 Q 10 0, 15 0 L 35 0 Q 40 0, 40 5 L 45 55 Q 45 60, 40 60 L 10 60 Q 5 60, 5 55 Z%22 fill=%22none%22 stroke=%22%238B4513%22 stroke-width=%222.5%22/%3E%3Cellipse cx=%2225%22 cy=%223%22 rx=%2210%22 ry=%222%22 fill=%22none%22 stroke=%22%238B4513%22 stroke-width=%222%22/%3E%3Crect x=%227%22 y=%2245%22 width=%2236%22 height=%2215%22 fill=%22%23DC2626%22 opacity=%220.7%22/%3E%3C/svg%3E'">
+                    </div>
+                    <strong style="color: var(--chai-dark);">Kadwi Chai</strong>
+                    <span style="font-size: 0.85rem; color: var(--text-light);">Poor Work</span>
+                </div>
+
+                <div class="kulhad-option" onclick="selectRating('theek-thak')">
+                    <div class="large-kulhad">
+                        <img src="kulhad-theek-thak.png" alt="Theek-Thak" class="kulhad-image"
+                             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2290%22 viewBox=%220 0 50 60%22%3E%3Cpath d=%22M 10 5 Q 10 0, 15 0 L 35 0 Q 40 0, 40 5 L 45 55 Q 45 60, 40 60 L 10 60 Q 5 60, 5 55 Z%22 fill=%22none%22 stroke=%22%238B4513%22 stroke-width=%222.5%22/%3E%3Cellipse cx=%2225%22 cy=%223%22 rx=%2210%22 ry=%222%22 fill=%22none%22 stroke=%22%238B4513%22 stroke-width=%222%22/%3E%3Crect x=%227%22 y=%2230%22 width=%2236%22 height=%2230%22 fill=%22%23F59E0B%22 opacity=%220.7%22/%3E%3C/svg%3E'">
+                    </div>
+                    <strong style="color: var(--chai-dark);">Theek-Thak</strong>
+                    <span style="font-size: 0.85rem; color: var(--text-light);">Average Work</span>
+                </div>
+
+                <div class="kulhad-option" onclick="selectRating('kadak')">
+                    <div class="large-kulhad">
+                        <img src="kulhad-kadak.png" alt="Kadak Chai" class="kulhad-image"
+                             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2290%22 viewBox=%220 0 50 60%22%3E%3Cpath d=%22M 10 5 Q 10 0, 15 0 L 35 0 Q 40 0, 40 5 L 45 55 Q 45 60, 40 60 L 10 60 Q 5 60, 5 55 Z%22 fill=%22none%22 stroke=%22%238B4513%22 stroke-width=%222.5%22/%3E%3Cellipse cx=%2225%22 cy=%223%22 rx=%2210%22 ry=%222%22 fill=%22none%22 stroke=%22%238B4513%22 stroke-width=%222%22/%3E%3Crect x=%227%22 y=%2210%22 width=%2236%22 height=%2250%22 fill=%22%236B4423%22 opacity=%220.7%22/%3E%3C/svg%3E'">
+                    </div>
+                    <strong style="color: var(--chai-dark);">Kadak Chai</strong>
+                    <span style="font-size: 0.85rem; color: var(--text-light);">Excellent Work</span>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                <button class="btn btn-secondary" style="flex: 1;" onclick="closeRatingModal()">Cancel</button>
+                <button class="btn btn-primary" style="flex: 1;" onclick="submitRating()">Submit Rating</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <h3>Civic Chai</h3>
+                <p>AI-powered civic incident management with public transparency and Kulhad rating system.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="report.html">Report Issue</a></li>
+                    <li><a href="track.html">Track Status</a></li>
+                    <li><a href="gallery.html">Public Gallery</a></li>
+                    <li><a href="analytics.html">Analytics</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="index.html#how-it-works">How It Works</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="authorities.html">For Authorities</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="security.html">Data Security</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Civic Chai. Powered by AI for transparent civic governance.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        let selectedRating = null;
+        let currentIssueId = null;
+
+        function filterGallery(filter) {
+            const items = document.querySelectorAll('.gallery-item');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            items.forEach(item => {
+                if (filter === 'all') {
+                    item.style.display = 'block';
+                } else if (filter === 'kadak') {
+                    item.style.display = item.dataset.rating === 'kadak' ? 'block' : 'none';
+                } else if (filter === 'recent') {
+                    item.style.display = 'block'; // In production, check actual dates
+                } else {
+                    item.style.display = item.dataset.priority === filter ? 'block' : 'none';
+                }
+            });
+        }
+
+        function openRatingModal(issueId) {
+            currentIssueId = issueId;
+            document.getElementById('rate-modal').classList.add('active');
+        }
+
+        function closeRatingModal() {
+            document.getElementById('rate-modal').classList.remove('active');
+            selectedRating = null;
+            document.querySelectorAll('.kulhad-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+        }
+
+        function selectRating(rating) {
+            selectedRating = rating;
+            document.querySelectorAll('.kulhad-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+        }
+
+        function submitRating() {
+            if (!selectedRating) {
+                alert('Please select a rating');
+                return;
+            }
+            
+            const ratingNames = {
+                'kadwi': 'Kadwi Chai (Poor)',
+                'theek-thak': 'Theek-Thak (Average)',
+                'kadak': 'Kadak Chai (Excellent)'
+            };
+            
+            alert(`Thank you! Your rating: ${ratingNames[selectedRating]}\n\nYour feedback helps improve civic services!`);
+            closeRatingModal();
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('rate-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeRatingModal();
+            }
+        });
+    </script>
+</body>
+</html>

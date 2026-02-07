@@ -92,11 +92,15 @@
 <body>
     <header>
         <nav>
-            <div class="logo" onclick="window.location.href='index.html'">☕ Civic Chai</div>
+            <div class="logo" onclick="window.location.href='index.html'">
+                <img src="logo.png" alt="Civic Chai" class="logo-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                <span class="logo-text">☕ Civic Chai</span>
+            </div>
             <ul id="nav-menu">
                 <li><a href="index.html#how-it-works">How It Works</a></li>
                 <li><a href="index.html#philosophy">Philosophy</a></li>
                 <li><a href="index.html#stakeholders">Who It's For</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
                 <li><a href="track.html">Track Issue</a></li>
             </ul>
             <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
@@ -308,7 +312,7 @@
     <footer>
         <div class="footer-content">
             <div class="footer-about">
-                <h3>☕ Civic Chai</h3>
+                <h3 style="display: flex; align-items: center; gap: 0.5rem;"><img src="logo.png" alt="" style="height: 30px; width: auto;" onerror="this.style.display='none'">Civic Chai</h3>
                 <p>AI-powered civic incident management with automatic prioritization, multilingual NLP, fraud detection, and smart resolution verification.</p>
             </div>
             <div class="footer-section">
