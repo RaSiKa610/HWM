@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - Civic Chai</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo" onclick="window.location.href='index.html'">☕ Civic Chai</div>
+            <ul id="nav-menu">
+                <li><a href="index.html#how-it-works">How It Works</a></li>
+                <li><a href="index.html#philosophy">Philosophy</a></li>
+                <li><a href="index.html#stakeholders">Who It's For</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="authorities.html">For Authorities</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="report.html" class="cta-btn">Report Issue</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
+        </nav>
+    </header>
+
+    <div class="page-header">
+        <h1>Public Analytics Dashboard</h1>
+        <p>Transparency in action - See how civic issues are being resolved</p>
+    </div>
+
+    <div class="content-section">
+        <div id="analytics-content"></div>
+
+        <div class="card" style="margin-top: 3rem; background: linear-gradient(135deg, #FF6B35 0%, #6B4423 100%); color: white;">
+            <h3 style="margin-bottom: 1.5rem;">Why Transparency Matters</h3>
+            <div style="display: grid; gap: 1.5rem;">
+                <div style="display: flex; gap: 1rem; align-items: start;">
+                    <span style="font-size: 2rem;">📊</span>
+                    <div>
+                        <h4 style="margin-bottom: 0.5rem;">Data-Driven Decisions</h4>
+                        <p style="opacity: 0.9;">Authorities can see patterns and allocate resources effectively</p>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 1rem; align-items: start;">
+                    <span style="font-size: 2rem;">🎯</span>
+                    <div>
+                        <h4 style="margin-bottom: 0.5rem;">Performance Tracking</h4>
+                        <p style="opacity: 0.9;">Track average resolution times and SLA compliance</p>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 1rem; align-items: start;">
+                    <span style="font-size: 2rem;">🤝</span>
+                    <div>
+                        <h4 style="margin-bottom: 0.5rem;">Trust Building</h4>
+                        <p style="opacity: 0.9;">Citizens can see real progress and accountability in action</p>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 1rem; align-items: start;">
+                    <span style="font-size: 2rem;">🔍</span>
+                    <div>
+                        <h4 style="margin-bottom: 0.5rem;">Identify Patterns</h4>
+                        <p style="opacity: 0.9;">Recurring problems get highlighted for systemic fixes</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 2rem;">
+            <h3 style="font-family: 'Poppins', sans-serif; color: #2C1810; margin-bottom: 1.5rem;">
+                What Makes Civic Chai Different
+            </h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                <div style="text-align: center; padding: 1.5rem; background: #FFF8F0; border-radius: 10px;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">⏱️</div>
+                    <h4 style="color: #6B4423; margin-bottom: 0.5rem;">Fix Time Metrics</h4>
+                    <p style="color: #666; font-size: 0.95rem;">Not star ratings - actual time to resolution</p>
+                </div>
+                <div style="text-align: center; padding: 1.5rem; background: #FFF8F0; border-radius: 10px;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">✅</div>
+                    <h4 style="color: #6B4423; margin-bottom: 0.5rem;">SLA Compliance</h4>
+                    <p style="color: #666; font-size: 0.95rem;">Track adherence to time-bound commitments</p>
+                </div>
+                <div style="text-align: center; padding: 1.5rem; background: #FFF8F0; border-radius: 10px;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🔁</div>
+                    <h4 style="color: #6B4423; margin-bottom: 0.5rem;">Repeated Failures</h4>
+                    <p style="color: #666; font-size: 0.95rem;">Same issues happening again? We track that</p>
+                </div>
+                <div style="text-align: center; padding: 1.5rem; background: #FFF8F0; border-radius: 10px;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">📸</div>
+                    <h4 style="color: #6B4423; margin-bottom: 0.5rem;">Proof-Based Closure</h4>
+                    <p style="color: #666; font-size: 0.95rem;">Issues only close with evidence of action</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cta-section">
+        <h2>See a Problem in Your Area?</h2>
+        <p>Help improve your community by reporting civic issues</p>
+        <a href="report.html" class="btn">Report an Issue</a>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <h3>☕ Civic Chai</h3>
+                <p>A civic incident management platform that enables citizens to report public issues quickly while automatically prioritizing them based on real-world criticality.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="report.html">Report Issue</a></li>
+                    <li><a href="track.html">Track Status</a></li>
+                    <li><a href="analytics.html">View Analytics</a></li>
+                    <li><a href="mobile.html">Mobile App</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="index.html#how-it-works">How It Works</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="authorities.html">For Authorities</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="security.html">Data Security</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Civic Chai. Built for citizens, designed for action.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

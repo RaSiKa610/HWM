@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Civic Chai</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo" onclick="window.location.href='index.html'">☕ Civic Chai</div>
+            <ul id="nav-menu">
+                <li><a href="index.html#how-it-works">How It Works</a></li>
+                <li><a href="index.html#philosophy">Philosophy</a></li>
+                <li><a href="index.html#stakeholders">Who It's For</a></li>
+                <li><a href="report.html" class="cta-btn">Report Issue</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
+        </nav>
+    </header>
+
+    <div class="page-header">
+        <h1>Get in Touch</h1>
+        <p>Have questions? We're here to help</p>
+    </div>
+
+    <div class="content-section">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; max-width: 1200px; margin: 0 auto;">
+            <div class="card">
+                <h2 style="font-family: 'Poppins', sans-serif; color: #2C1810; margin-bottom: 2rem;">
+                    Send Us a Message
+                </h2>
+                
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label for="name">Your Name *</label>
+                        <input type="text" id="name" required placeholder="John Doe">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" required placeholder="john@example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <select id="subject" required>
+                            <option value="">Select a subject</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="technical">Technical Support</option>
+                            <option value="authority">For Authorities/Government</option>
+                            <option value="partnership">Partnership Opportunities</option>
+                            <option value="feedback">Feedback/Suggestions</option>
+                            <option value="press">Press/Media</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" required placeholder="How can we help you?"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+
+            <div>
+                <div class="card" style="margin-bottom: 2rem;">
+                    <h3 style="font-family: 'Poppins', sans-serif; color: #2C1810; margin-bottom: 1.5rem;">
+                        Contact Information
+                    </h3>
+                    
+                    <div style="display: grid; gap: 1.5rem;">
+                        <div style="display: flex; gap: 1rem; align-items: start;">
+                            <span style="color: #FF6B35; font-size: 1.5rem;">📧</span>
+                            <div>
+                                <h4 style="color: #6B4423; margin-bottom: 0.25rem;">Email</h4>
+                                <a href="mailto:hello@civicchai.in" style="color: #666; text-decoration: none;">
+                                    hello@civicchai.in
+                                </a>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 1rem; align-items: start;">
+                            <span style="color: #FF6B35; font-size: 1.5rem;">📱</span>
+                            <div>
+                                <h4 style="color: #6B4423; margin-bottom: 0.25rem;">Phone</h4>
+                                <a href="tel:+912212345678" style="color: #666; text-decoration: none;">
+                                    +91 22 1234 5678
+                                </a>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 1rem; align-items: start;">
+                            <span style="color: #FF6B35; font-size: 1.5rem;">📍</span>
+                            <div>
+                                <h4 style="color: #6B4423; margin-bottom: 0.25rem;">Office</h4>
+                                <p style="color: #666; margin: 0;">
+                                    Mumbai, Maharashtra<br>
+                                    India
+                                </p>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 1rem; align-items: start;">
+                            <span style="color: #FF6B35; font-size: 1.5rem;">🕐</span>
+                            <div>
+                                <h4 style="color: #6B4423; margin-bottom: 0.25rem;">Support Hours</h4>
+                                <p style="color: #666; margin: 0;">
+                                    Monday - Friday: 9 AM - 6 PM IST<br>
+                                    Saturday: 10 AM - 4 PM IST
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="background: linear-gradient(135deg, #FFF8F0 0%, #F5E6D3 100%);">
+                    <h3 style="color: #6B4423; margin-bottom: 1rem;">For Authorities</h3>
+                    <p style="color: #666; margin-bottom: 1rem;">
+                        Are you a government official or municipal authority interested in implementing Civic Chai in your area?
+                    </p>
+                    <a href="authorities.html" class="btn btn-secondary">
+                        Learn More
+                    </a>
+                </div>
+
+                <div class="card" style="margin-top: 2rem;">
+                    <h3 style="color: #6B4423; margin-bottom: 1rem;">Quick Links</h3>
+                    <div style="display: grid; gap: 0.75rem;">
+                        <a href="report.html" style="color: #FF6B35; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                            → Report a Civic Issue
+                        </a>
+                        <a href="track.html" style="color: #FF6B35; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                            → Track Issue Status
+                        </a>
+                        <a href="faq.html" style="color: #FF6B35; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                            → View FAQs
+                        </a>
+                        <a href="analytics.html" style="color: #FF6B35; text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+                            → View Public Analytics
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="max-width: 1200px; margin: 3rem auto 0; background: linear-gradient(135deg, #FF6B35 0%, #6B4423 100%); color: white; text-align: center;">
+            <h3 style="margin-bottom: 1rem;">Join Our Mission</h3>
+            <p style="opacity: 0.9; margin-bottom: 1.5rem;">
+                Help us build better cities through transparent, accountable civic governance
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="report.html" class="btn" style="background: white; color: var(--chai-orange);">
+                    Report Your First Issue
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <h3>☕ Civic Chai</h3>
+                <p>A civic incident management platform that enables citizens to report public issues quickly while automatically prioritizing them based on real-world criticality.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="report.html">Report Issue</a></li>
+                    <li><a href="track.html">Track Status</a></li>
+                    <li><a href="analytics.html">View Analytics</a></li>
+                    <li><a href="mobile.html">Mobile App</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="index.html#how-it-works">How It Works</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="authorities.html">For Authorities</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="security.html">Data Security</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Civic Chai. Built for citizens, designed for action.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
