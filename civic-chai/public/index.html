@@ -1,43 +1,348 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Civic Chai - Fix Civic Issues with Time-Bound Accountability</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo" onclick="window.location.href='index.html'">☕ Civic Chai</div>
+            <ul id="nav-menu">
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#philosophy">Philosophy</a></li>
+                <li><a href="#stakeholders">Who It's For</a></li>
+                <li><a href="report.html" class="cta-btn">Report Issue</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
+        </nav>
+    </header>
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Civic Issues Fixed with <span class="highlight">Time-Bound Accountability</span></h1>
+                <p>A citizen-first platform where everyday public problems are reported, prioritized by seriousness, and fixed with real action—not just complaints.</p>
+                <div class="hero-buttons">
+                    <a href="report.html" class="btn btn-primary">Report an Issue</a>
+                    <a href="#how-it-works" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="priority-cards">
+                    <div class="priority-card" onclick="showPriorityInfo('critical')">
+                        <span class="priority-badge badge-critical">🟥 CRITICAL</span>
+                        <h4>Overflowing toilet near school</h4>
+                        <p>Response: Hours</p>
+                    </div>
+                    <div class="priority-card" onclick="showPriorityInfo('high')">
+                        <span class="priority-badge badge-high">🟧 HIGH</span>
+                        <h4>Broken streetlight main road</h4>
+                        <p>Response: 1 Day</p>
+                    </div>
+                    <div class="priority-card" onclick="showPriorityInfo('medium')">
+                        <span class="priority-badge badge-medium">🟨 MEDIUM</span>
+                        <h4>Pothole on side street</h4>
+                        <p>Response: Few Days</p>
+                    </div>
+                    <div class="priority-card" onclick="showPriorityInfo('low')">
+                        <span class="priority-badge badge-low">🟩 LOW</span>
+                        <h4>Graffiti on park wall</h4>
+                        <p>Response: Week</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+        <section id="philosophy" class="philosophy">
+            <div class="container">
+                <h2 class="section-title">Built on Three Core Beliefs</h2>
+                <div class="beliefs">
+                    <div class="belief-card">
+                        <div class="belief-number">1</div>
+                        <h3>Not Every Problem is Equal</h3>
+                        <p>Some issues are annoying. Others are dangerous, unhealthy, or urgent. Civic Chai triages problems like an emergency room—prioritizing what matters most.</p>
+                    </div>
+                    <div class="belief-card">
+                        <div class="belief-number">2</div>
+                        <h3>Citizens Shouldn't Chase the System</h3>
+                        <p>No more follow-up calls, office visits, or endless waiting. Civic Chai makes the system chase the problem, not the citizen.</p>
+                    </div>
+                    <div class="belief-card">
+                        <div class="belief-number">3</div>
+                        <h3>Fixing Matters More Than Replying</h3>
+                        <p>A status of "Resolved" means nothing without proof. Civic Chai requires evidence of action, not just words.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+        <section id="how-it-works" class="how-it-works">
+            <div class="container">
+                <h2 class="section-title">How Civic Chai Works</h2>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Citizen Reports a Problem</h3>
+                            <p>Scan QR code or open the website. Choose issue type, add photo (optional), and submit in under 30 seconds. No essays, no long forms.</p>
+                            <div class="step-features">
+                                <span class="feature-tag">Quick Scan</span>
+                                <span class="feature-tag">Photo Upload</span>
+                                <span class="feature-tag">Under 30 Seconds</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>System Decides Criticality</h3>
+                            <p>Civic Chai automatically analyzes: issue type, location, evidence, and history. Then it assigns a priority level that doesn't exist in current platforms.</p>
+                            <div class="step-features">
+                                <span class="feature-tag">🟥 Critical</span>
+                                <span class="feature-tag">🟧 High</span>
+                                <span class="feature-tag">🟨 Medium</span>
+                                <span class="feature-tag">🟩 Low</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Time-Bound Action is Enforced</h3>
+                            <p>Each priority level has a deadline. If ignored, it auto-escalates to senior officials. Citizens see this escalation in real-time.</p>
+                            <div class="step-features">
+                                <span class="feature-tag">SLA Tracking</span>
+                                <span class="feature-tag">Auto-Escalation</span>
+                                <span class="feature-tag">Transparency</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Authority Must Show Proof</h3>
+                            <p>To close an issue, authorities upload after-photos and describe action taken. Citizens can accept or reject—if rejected, the issue reopens.</p>
+                            <div class="step-features">
+                                <span class="feature-tag">Photo Evidence</span>
+                                <span class="feature-tag">Citizen Verification</span>
+                                <span class="feature-tag">Reopen if Needed</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h3>Performance Becomes Visible</h3>
+                            <p>Instead of star ratings, Civic Chai shows average fix time, SLA compliance, and repeated failures. This creates accountability without shaming.</p>
+                            <div class="step-features">
+                                <span class="feature-tag">Fix Time Metrics</span>
+                                <span class="feature-tag">Compliance Tracking</span>
+                                <span class="feature-tag">Data-Driven</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="differentiators">
+            <div class="container">
+                <h2 class="section-title">What Civic Chai Is NOT</h2>
+                <div class="diff-grid">
+                    <div class="diff-card">
+                        <h3>❌ Not a Social Media App</h3>
+                        <p>This isn't about likes, shares, or viral posts. It's about getting real problems fixed with measurable accountability.</p>
+                    </div>
+                    <div class="diff-card">
+                        <h3>❌ Not a Star-Rating System</h3>
+                        <p>We don't use subjective reviews. We track objective metrics: fix time, SLA compliance, and resolution proof.</p>
+                    </div>
+                    <div class="diff-card">
+                        <h3>❌ Not a Rant/Complaint Wall</h3>
+                        <p>Civic Chai is action-oriented, not emotion-oriented. Every report leads to time-bound resolution with proof.</p>
+                    </div>
+                    <div class="diff-card">
+                        <h3>✅ Complements Existing Systems</h3>
+                        <p>We don't replace CPGRAMS or other platforms. We fix the execution gaps by adding urgency, transparency, and accountability.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="stakeholders" class="stakeholders">
+            <div class="container">
+                <h2 class="section-title">Who Civic Chai is For</h2>
+                <div class="stakeholder-cards">
+                    <div class="stakeholder-card">
+                        <div class="stakeholder-icon">👥</div>
+                        <h3>Citizens</h3>
+                        <ul>
+                            <li>Easy reporting</li>
+                            <li>Faster fixes</li>
+                            <li>No follow-ups needed</li>
+                            <li>Real transparency</li>
+                        </ul>
+                    </div>
+                    <div class="stakeholder-card">
+                        <div class="stakeholder-icon">🏛️</div>
+                        <h3>Authorities</h3>
+                        <ul>
+                            <li>Clear priorities</li>
+                            <li>Reduced chaos</li>
+                            <li>Data-backed decisions</li>
+                            <li>Better performance tracking</li>
+                        </ul>
+                    </div>
+                    <div class="stakeholder-card">
+                        <div class="stakeholder-icon">🌆</div>
+                        <h3>Government</h3>
+                        <ul>
+                            <li>Better execution</li>
+                            <li>Trust building</li>
+                            <li>Smart city alignment</li>
+                            <li>Measurable outcomes</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="ai-features">
+            <div class="container">
+                <h2 class="section-title">Powered by AI for Maximum Accuracy</h2>
+                <p style="text-align: center; color: #666; font-size: 1.2rem; margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    Advanced artificial intelligence makes Civic Chai smarter, faster, and more reliable than any traditional complaint system.
+                </p>
+                
+                <div class="ai-grid">
+                    <div class="ai-card">
+                        <div class="ai-icon">🤖</div>
+                        <h3>Auto-Severity Detection</h3>
+                        <p>AI analyzes your photo and description to automatically assign the correct priority level (P1-P4). No manual classification needed.</p>
+                        <div class="ai-tech">Image Recognition + NLP</div>
+                    </div>
+
+                    <div class="ai-card">
+                        <div class="ai-icon">🗣️</div>
+                        <h3>Marathi/Hinglish Support</h3>
+                        <p>Report in natural language - voice or text. AI understands code-mixed Marathi and English to extract issue details.</p>
+                        <div class="ai-tech">Natural Language Processing</div>
+                    </div>
+
+                    <div class="ai-card">
+                        <div class="ai-icon">🔍</div>
+                        <h3>Duplicate Detection</h3>
+                        <p>AI checks if the same issue was already reported nearby and clusters similar complaints into one ticket.</p>
+                        <div class="ai-tech">Geospatial Clustering</div>
+                    </div>
+
+                    <div class="ai-card">
+                        <div class="ai-icon">✓</div>
+                        <h3>Image Verification</h3>
+                        <p>Detects fake or old photos using reverse image search. Verifies before-after photos actually match the location.</p>
+                        <div class="ai-tech">Computer Vision + Metadata</div>
+                    </div>
+
+                    <div class="ai-card">
+                        <div class="ai-icon">📈</div>
+                        <h3>Predictive Escalation</h3>
+                        <p>AI predicts which authorities might ignore issues based on historical data and pre-escalates high-risk cases.</p>
+                        <div class="ai-tech">Machine Learning</div>
+                    </div>
+
+                    <div class="ai-card">
+                        <div class="ai-icon">📸</div>
+                        <h3>Smart Resolution Verification</h3>
+                        <p>AI automatically compares before and after photos, flagging suspicious resolutions for citizen review.</p>
+                        <div class="ai-tech">Image Comparison AI</div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 3rem; padding: 2rem; background: linear-gradient(135deg, #FFF8F0 0%, #F5E6D3 100%); border-radius: 15px;">
+                    <h3 style="color: #6B4423; margin-bottom: 1rem;">Why AI-Powered Matters</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                        <div>
+                            <div style="font-size: 2.5rem; color: #FF6B35; margin-bottom: 0.5rem;">15s</div>
+                            <p style="color: #666; margin: 0;">Report Time</p>
+                        </div>
+                        <div>
+                            <div style="font-size: 2.5rem; color: #FF6B35; margin-bottom: 0.5rem;">99%</div>
+                            <p style="color: #666; margin: 0;">Fraud Prevention</p>
+                        </div>
+                        <div>
+                            <div style="font-size: 2.5rem; color: #FF6B35; margin-bottom: 0.5rem;">0</div>
+                            <p style="color: #666; margin: 0;">Manual Triage</p>
+                        </div>
+                        <div>
+                            <div style="font-size: 2.5rem; color: #FF6B35; margin-bottom: 0.5rem;">100%</div>
+                            <p style="color: #666; margin: 0;">Verified Closures</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="report" class="cta-section">
+            <h2>Ready to Fix Your City?</h2>
+            <p>Report civic issues in under 30 seconds and watch them get resolved with time-bound accountability.</p>
+            <a href="report.html" class="btn">Report an Issue Now</a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <h3>☕ Civic Chai</h3>
+                <p>A civic incident management platform that enables citizens to report public issues quickly while automatically prioritizing them based on real-world criticality.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="report.html">Report Issue</a></li>
+                    <li><a href="track.html">Track Status</a></li>
+                    <li><a href="analytics.html">View Analytics</a></li>
+                    <li><a href="mobile.html">Mobile App</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="authorities.html">For Authorities</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="security.html">Data Security</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Civic Chai. Built for citizens, designed for action.</p>
+        </div>
+    </footer>
+
+    <!-- Priority Info Modal -->
+    <div id="priority-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
 </html>

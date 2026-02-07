@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Civic Chai</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .faq-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 4px solid var(--chai-cream);
+        }
+        .faq-item:hover {
+            border-left-color: var(--chai-orange);
+            box-shadow: var(--shadow-soft);
+        }
+        .faq-item.active {
+            border-left-color: var(--chai-orange);
+        }
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--chai-dark);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            margin-top: 1rem;
+        }
+        .faq-toggle {
+            font-size: 1.5rem;
+            color: var(--chai-orange);
+            transition: transform 0.3s;
+        }
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo" onclick="window.location.href='index.html'">☕ Civic Chai</div>
+            <ul id="nav-menu">
+                <li><a href="index.html#how-it-works">How It Works</a></li>
+                <li><a href="index.html#philosophy">Philosophy</a></li>
+                <li><a href="index.html#stakeholders">Who It's For</a></li>
+                <li><a href="report.html" class="cta-btn">Report Issue</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
+        </nav>
+    </header>
+
+    <div class="page-header">
+        <h1>Frequently Asked Questions</h1>
+        <p>Everything you need to know about Civic Chai</p>
+    </div>
+
+    <div class="content-section" style="max-width: 900px; margin: 0 auto;">
+        <div class="faq-category" style="margin-bottom: 3rem;">
+            <h2 style="font-family: 'Poppins', sans-serif; color: #2C1810; margin-bottom: 1.5rem;">
+                General Questions
+            </h2>
+            
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <span>What is Civic Chai?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Civic Chai is a civic incident management platform that enables citizens to report public issues quickly while automatically prioritizing them based on real-world criticality. The system enforces time-bound resolution through SLAs, escalation, and proof-based closure, ensuring transparency and accountability in public service delivery.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <span>How is Civic Chai different from other complaint platforms?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Unlike other platforms, Civic Chai: (1) Automatically prioritizes issues by criticality, (2) Enforces time-bound SLAs with auto-escalation, (3) Requires photo proof of resolution, (4) Allows citizen verification of fixes, and (5) Tracks performance metrics instead of subjective star ratings. We focus on action, not just complaints.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <span>Is Civic Chai free to use?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Yes! Civic Chai is completely free for citizens. Our mission is to improve public service delivery and accountability, making it accessible to everyone.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-category" style="margin-bottom: 3rem;">
+            <h2 style="font-family: 'Poppins', sans-serif; color: #2C1810; margin-bottom: 1.5rem;">
+                Reporting Issues
+            </h2>
+            
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <span>How do I report an issue?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Simply click "Report Issue" on our website or scan a QR code if available. Select the issue type, enter the location, provide a brief description, and optionally upload a photo. The entire process takes under 30 seconds.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <span>Do I need to create an account?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    No account is required to report issues. You'll receive an Issue ID to track your report. However, providing your contact number (optional) allows us to send you status updates.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <span>What types of issues can I report?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    You can report any public civic issue: sewage/drainage problems, broken streetlights, potholes, public toilet issues, electrical hazards, damaged public property, graffiti, overgrown vegetation, and more. If it affects public spaces or services, you can report it.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <span>Should I upload a photo?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    While optional, photos are highly recommended. They help authorities verify the issue, assess its severity accurately, and prioritize faster. Clear photos also serve as evidence of the problem's condition.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-category" style="margin-bottom: 3rem;">
+            <h2 style="font-family: 'Poppins', sans-serif; color: #2C1810; margin-bottom: 1.5rem;">
+                Priority System
+            </h2>
+            
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <span>How are issues prioritized?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Civic Chai automatically analyzes the issue type, location, evidence, and history to assign one of four priority levels: Critical (🟥), High (🟧), Medium (🟨), or Low (🟩). This ensures dangerous or urgent issues get immediate attention, while minor cosmetic problems are handled appropriately.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <span>What are the response times for each priority?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Critical issues: Within hours | High priority: Within 1 day | Medium priority: Within few days | Low priority: Within a week. These are SLA commitments, and if not met, the issue automatically escalates to senior officials.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <span>Can I dispute the priority assigned to my issue?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Priority is determined automatically based on objective criteria to ensure fairness. However, if you believe there are exceptional circumstances, you can provide additional details in the description or contact us with your Issue ID.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-category" style="margin-bottom: 3rem;">
+            <h2 style="font-family: 'Poppins', sans-serif; color: #2C1810; margin-bottom: 1.5rem;">
+                Tracking & Resolution
+            </h2>
+            
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <span>How do I track my reported issue?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Use your Issue ID (provided when you submit the report) on our Track Status page. You'll see real-time updates on your issue's status, priority level, and timeline.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <span>What happens if authorities don't respond in time?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    If an issue isn't addressed within its SLA deadline, it automatically escalates to senior officials. Citizens can see this escalation happening in real-time. This ensures no issue gets forgotten.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <span>How do I know the issue is actually fixed?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Authorities must upload after-photos and describe the action taken to close an issue. As the reporter, you can review this evidence and either accept the resolution or reject it if the problem isn't actually fixed. Rejected issues automatically reopen.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <span>What if the same issue happens again?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Report it again! Civic Chai tracks repeated failures at the same location. This data helps identify systemic problems that need permanent solutions rather than temporary fixes.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-category">
+            <h2 style="font-family: 'Poppins', sans-serif; color: #2C1810; margin-bottom: 1.5rem;">
+                Privacy & Data
+            </h2>
+            
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <span>What information is made public?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Only the issue details (type, location, description, photo) and resolution status are public. Your personal contact information is never shared publicly. Performance metrics are aggregated and anonymized.
+                </div>
+            </div>
+
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <span>How is my data protected?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    We use industry-standard encryption and security practices. Your contact information is stored securely and used only for issue updates. We never sell or share your personal data with third parties.
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 3rem; background: linear-gradient(135deg, #FF6B35 0%, #6B4423 100%); color: white; text-align: center;">
+            <h3 style="margin-bottom: 1rem;">Still Have Questions?</h3>
+            <p style="opacity: 0.9; margin-bottom: 1.5rem;">We're here to help!</p>
+            <a href="contact.html" class="btn" style="background: white; color: var(--chai-orange);">Contact Us</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <h3>☕ Civic Chai</h3>
+                <p>A civic incident management platform that enables citizens to report public issues quickly while automatically prioritizing them based on real-world criticality.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="report.html">Report Issue</a></li>
+                    <li><a href="track.html">Track Status</a></li>
+                    <li><a href="analytics.html">View Analytics</a></li>
+                    <li><a href="mobile.html">Mobile App</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="index.html#how-it-works">How It Works</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="authorities.html">For Authorities</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="security.html">Data Security</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Civic Chai. Built for citizens, designed for action.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function toggleFaq(element) {
+            // Close all other FAQs
+            document.querySelectorAll('.faq-item').forEach(item => {
+                if (item !== element) {
+                    item.classList.remove('active');
+                }
+            });
+            // Toggle clicked FAQ
+            element.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

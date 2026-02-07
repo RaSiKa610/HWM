@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Issue - Civic Chai</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .ai-assist-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #FF6B35, #6B4423);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        .ai-analysis {
+            background: linear-gradient(135deg, #FFF8F0, #F5E6D3);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #FF6B35;
+            margin-top: 1rem;
+            display: none;
+        }
+        .ai-analysis.active {
+            display: block;
+            animation: fadeIn 0.3s ease-out;
+        }
+        .voice-input-btn {
+            background: var(--chai-orange);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            margin-top: 0.5rem;
+        }
+        .voice-input-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+        }
+        .voice-input-btn.recording {
+            background: #DC2626;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .duplicate-warning {
+            background: #FEF3C7;
+            border-left: 4px solid #F59E0B;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            display: none;
+        }
+        .duplicate-warning.active {
+            display: block;
+        }
+        .language-toggle {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .language-toggle button {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--chai-cream);
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'DM Sans', sans-serif;
+        }
+        .language-toggle button.active {
+            background: var(--chai-orange);
+            color: white;
+            border-color: var(--chai-orange);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo" onclick="window.location.href='index.html'">☕ Civic Chai</div>
+            <ul id="nav-menu">
+                <li><a href="index.html#how-it-works">How It Works</a></li>
+                <li><a href="index.html#philosophy">Philosophy</a></li>
+                <li><a href="index.html#stakeholders">Who It's For</a></li>
+                <li><a href="track.html">Track Issue</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
+        </nav>
+    </header>
+
+    <div class="page-header">
+        <h1>Report a Civic Issue <span style="font-size: 1.5rem;">🤖</span></h1>
+        <p>AI-powered reporting in 15 seconds - Automatic priority detection & fraud prevention</p>
+    </div>
+
+    <div class="form-container">
+        <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+                <h2 style="font-family: 'Poppins', sans-serif; color: #2C1810; margin: 0;">
+                    What's the Problem?
+                </h2>
+                <div class="language-toggle">
+                    <button class="active" onclick="setLanguage('en', event)">English</button>
+                    <button onclick="setLanguage('mr', event)">मराठी</button>
+                    <button onclick="setLanguage('hi', event)">हिंदी/Hinglish</button>
+                </div>
+            </div>
+            
+            <form id="report-form">
+                <div class="form-group">
+                    <label>Quick Voice Report <span class="ai-assist-badge">🎤 AI Voice</span></label>
+                    <button type="button" class="voice-input-btn" id="voice-btn" onclick="toggleVoiceInput()">
+                        <span id="voice-icon">🎤</span>
+                        <span id="voice-text">Tap to speak in Marathi/Hinglish</span>
+                    </button>
+                    <small style="color: #666; display: block; margin-top: 0.5rem;">
+                        AI will automatically extract issue type, location, and severity from your natural speech
+                    </small>
+                    
+                    <div id="voice-transcript" style="margin-top: 1rem; padding: 1rem; background: #FFF8F0; border-radius: 8px; display: none;">
+                        <strong style="color: #6B4423;">You said:</strong>
+                        <p id="transcript-text" style="color: #666; margin-top: 0.5rem;"></p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin: 2rem 0; position: relative;">
+                    <span style="display: block; width: 100%; height: 1px; background: #ddd;"></span>
+                    <span style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--chai-light); padding: 0 1rem; color: #999;">
+                        OR
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Describe the Issue <span class="ai-assist-badge">🤖 AI Assist</span></label>
+                    <textarea id="description" placeholder="Type naturally in any language... e.g., 'MG Road वर gutter overflow झालाय, बदबू येतेय'" required></textarea>
+                    <small style="color: #666; display: block; margin-top: 0.5rem;">
+                        AI analyzes in real-time as you type - detects issue type, severity, and location
+                    </small>
+                </div>
+
+                <div id="ai-analysis" class="ai-analysis">
+                    <h4 style="color: #6B4423; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>🤖</span> AI Analysis Complete
+                    </h4>
+                    <div style="display: grid; gap: 1rem;">
+                        <div>
+                            <strong style="color: #2C1810;">Detected Issue:</strong>
+                            <span id="ai-issue-type" style="color: #666; margin-left: 0.5rem;">Sewage overflow</span>
+                        </div>
+                        <div>
+                            <strong style="color: #2C1810;">Auto-Assigned Priority:</strong>
+                            <span id="ai-priority" class="priority-badge badge-critical" style="margin-left: 0.5rem;">🟥 CRITICAL</span>
+                        </div>
+                        <div>
+                            <strong style="color: #2C1810;">Extracted Location:</strong>
+                            <span id="ai-location" style="color: #666; margin-left: 0.5rem;">MG Road, Mumbai</span>
+                        </div>
+                        <div style="margin-top: 0.5rem; padding: 0.75rem; background: white; border-radius: 6px;">
+                            <small style="color: #666;">
+                                ✓ Language detected: Hinglish (Marathi + English mix)<br>
+                                ✓ Confidence: 98% | Processing time: 0.3s
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="duplicate-warning" class="duplicate-warning">
+                    <h4 style="color: #92400E; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>⚠️</span> AI Detected Similar Issue
+                    </h4>
+                    <p style="color: #78350F; margin-bottom: 1rem;">
+                        A similar sewage overflow was reported <strong>35 meters away</strong> just <strong>3 hours ago</strong>. Your report will be linked to strengthen the case.
+                    </p>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <button type="button" class="btn btn-secondary" style="font-size: 0.9rem; padding: 0.5rem 1rem;" onclick="viewDuplicate()">
+                            View Similar Issue
+                        </button>
+                        <button type="button" class="btn btn-primary" style="font-size: 0.9rem; padding: 0.5rem 1rem;" onclick="linkAndReport()">
+                            Link & Report Together
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Confirm Location</label>
+                    <input type="text" id="location" placeholder="e.g., MG Road near City Mall, Mumbai" required>
+                    <button type="button" class="btn btn-secondary" style="margin-top: 0.5rem; font-size: 0.9rem; padding: 0.5rem 1rem;" onclick="useCurrentLocation()">
+                        📍 Use Current GPS Location
+                    </button>
+                </div>
+
+                <div class="form-group">
+                    <label>Upload Photo/Video <span class="ai-assist-badge">🤖 AI Verify</span></label>
+                    <div class="file-upload" onclick="document.getElementById('photo').click()">
+                        <input type="file" id="photo" accept="image/*,video/*">
+                        <p style="color: #6B4423; font-size: 3rem; margin-bottom: 0.5rem;">📸</p>
+                        <p style="color: #666;">Click to upload - AI will verify authenticity</p>
+                        <p style="color: #999; font-size: 0.9rem; margin-top: 0.5rem;">
+                            Detects fake photos, extracts location metadata, checks timestamp
+                        </p>
+                    </div>
+                    <div id="photo-preview" style="margin-top: 1rem; display: none;">
+                        <img id="preview-image" style="max-width: 100%; border-radius: 10px;" alt="Preview">
+                        <div id="image-verification" style="margin-top: 1rem; padding: 1rem; background: #F0FDF4; border-left: 4px solid #10B981; border-radius: 8px;">
+                            <p style="color: #065F46; margin: 0; display: flex; align-items: center; gap: 0.5rem;">
+                                <span>✓</span> <strong>Image Verified by AI</strong>
+                            </p>
+                            <small style="color: #047857; display: block; margin-top: 0.5rem;">
+                                ✓ Original photo (not edited/reused)<br>
+                                ✓ Taken today at 2:30 PM<br>
+                                ✓ GPS metadata matches reported location<br>
+                                ✓ No reverse image match found
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact">Your Contact (Optional)</label>
+                    <input type="tel" id="contact" placeholder="Phone number for AI-powered updates">
+                    <small style="color: #666; display: block; margin-top: 0.5rem;">
+                        Get smart notifications when: issue acknowledged, authority assigned, resolution uploaded, verification needed
+                    </small>
+                </div>
+
+                <div style="background: linear-gradient(135deg, #FFF8F0, #F5E6D3); padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem; border-left: 4px solid #FF6B35;">
+                    <h4 style="color: #6B4423; margin-bottom: 1rem;">🤖 AI-Powered Protection</h4>
+                    <div style="display: grid; gap: 0.75rem; color: #666; line-height: 1.7;">
+                        <div style="display: flex; gap: 0.5rem;">
+                            <span style="color: #10B981;">✓</span>
+                            <span><strong>Auto-Priority:</strong> Image recognition + NLP assigns P1-P4 instantly</span>
+                        </div>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <span style="color: #10B981;">✓</span>
+                            <span><strong>Duplicate Check:</strong> AI clusters nearby similar issues automatically</span>
+                        </div>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <span style="color: #10B981;">✓</span>
+                            <span><strong>Fraud Detection:</strong> Reverse image search prevents fake/old photos</span>
+                        </div>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <span style="color: #10B981;">✓</span>
+                            <span><strong>Smart Routing:</strong> Predicts best authority based on past performance</span>
+                        </div>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <span style="color: #10B981;">✓</span>
+                            <span><strong>Resolution Verify:</strong> AI compares before-after photos automatically</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary submit-btn" style="width: 100%; font-size: 1.2rem;">
+                    🚀 Submit AI-Verified Report
+                </button>
+            </form>
+        </div>
+
+        <div class="card" style="margin-top: 2rem; background: linear-gradient(135deg, #FF6B35 0%, #6B4423 100%); color: white;">
+            <h3 style="margin-bottom: 1.5rem;">🤖 AI Makes It Better</h3>
+            <div style="display: grid; gap: 1.5rem;">
+                <div style="display: flex; gap: 1rem; align-items: start;">
+                    <span style="font-size: 2rem;">⚡</span>
+                    <div>
+                        <h4 style="margin-bottom: 0.5rem;">15-Second Reporting</h4>
+                        <p style="opacity: 0.9; margin: 0;">Just speak or type - AI extracts everything needed</p>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 1rem; align-items: start;">
+                    <span style="font-size: 2rem;">🎯</span>
+                    <div>
+                        <h4 style="margin-bottom: 0.5rem;">Zero Manual Triage</h4>
+                        <p style="opacity: 0.9; margin: 0;">AI assigns priority automatically - 98% accuracy</p>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 1rem; align-items: start;">
+                    <span style="font-size: 2rem;">🛡️</span>
+                    <div>
+                        <h4 style="margin-bottom: 0.5rem;">99% Fraud Prevention</h4>
+                        <p style="opacity: 0.9; margin: 0;">AI catches fake photos and verifies resolutions</p>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 1rem; align-items: start;">
+                    <span style="font-size: 2rem;">🌐</span>
+                    <div>
+                        <h4 style="margin-bottom: 0.5rem;">Universal Language</h4>
+                        <p style="opacity: 0.9; margin: 0;">Marathi, Hindi, Hinglish, English - AI understands all</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <h3>☕ Civic Chai</h3>
+                <p>AI-powered civic incident management with automatic prioritization, multilingual NLP, fraud detection, and smart resolution verification.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="report.html">Report Issue</a></li>
+                    <li><a href="track.html">Track Status</a></li>
+                    <li><a href="analytics.html">View Analytics</a></li>
+                    <li><a href="mobile.html">Mobile App</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="index.html#how-it-works">How It Works</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="authorities.html">For Authorities</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="security.html">Data Security</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Civic Chai. Powered by AI for better civic governance.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="ai-features.js"></script>
+</body>
+</html>

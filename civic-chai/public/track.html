@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Issue - Civic Chai</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo" onclick="window.location.href='index.html'">☕ Civic Chai</div>
+            <ul id="nav-menu">
+                <li><a href="index.html#how-it-works">How It Works</a></li>
+                <li><a href="index.html#philosophy">Philosophy</a></li>
+                <li><a href="index.html#stakeholders">Who It's For</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="authorities.html">For Authorities</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="report.html" class="cta-btn">Report Issue</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
+        </nav>
+    </header>
+
+    <div class="page-header">
+        <h1>Track Your Issue</h1>
+        <p>Enter your Issue ID to see real-time status and updates</p>
+    </div>
+
+    <div class="content-section">
+        <div class="card" style="max-width: 600px; margin: 0 auto 3rem;">
+            <h2 style="font-family: 'Poppins', sans-serif; color: #2C1810; margin-bottom: 1.5rem;">
+                Search for Your Issue
+            </h2>
+            
+            <div class="form-group">
+                <label for="issue-id">Issue ID</label>
+                <input type="text" id="issue-id" placeholder="e.g., CC12345678" style="text-transform: uppercase;">
+                <small style="color: #666; display: block; margin-top: 0.5rem;">
+                    Your Issue ID was provided when you submitted the report
+                </small>
+            </div>
+
+            <button onclick="searchIssue()" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                Track Issue
+            </button>
+
+            <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 2px dashed #F5E6D3;">
+                <p style="color: #666; margin-bottom: 1rem;">Don't have your Issue ID?</p>
+                <a href="report.html" class="btn btn-secondary">Report New Issue</a>
+            </div>
+        </div>
+
+        <div id="search-results"></div>
+
+        <div class="card" style="background: linear-gradient(135deg, #FFF8F0 0%, #F5E6D3 100%); border-left: 4px solid #FF6B35;">
+            <h3 style="color: #6B4423; margin-bottom: 1rem;">Understanding Issue Status</h3>
+            <div style="display: grid; gap: 1.5rem;">
+                <div>
+                    <span class="status-badge status-pending">PENDING</span>
+                    <p style="color: #666; margin-top: 0.5rem;">Issue has been reported and is waiting for authority review</p>
+                </div>
+                <div>
+                    <span class="status-badge status-in-progress">IN PROGRESS</span>
+                    <p style="color: #666; margin-top: 0.5rem;">Authorities are actively working on resolving the issue</p>
+                </div>
+                <div>
+                    <span class="status-badge status-resolved">RESOLVED</span>
+                    <p style="color: #666; margin-top: 0.5rem;">Issue has been fixed with photo proof provided</p>
+                </div>
+                <div>
+                    <span class="status-badge status-rejected">REJECTED</span>
+                    <p style="color: #666; margin-top: 0.5rem;">Citizen rejected the resolution, issue has been reopened</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 2rem;">
+            <h3 style="font-family: 'Poppins', sans-serif; color: #2C1810; margin-bottom: 1.5rem;">
+                How Civic Chai Ensures Accountability
+            </h3>
+            <div style="display: grid; gap: 1.5rem;">
+                <div style="display: flex; gap: 1rem;">
+                    <div style="color: #FF6B35; font-size: 2rem;">⏱️</div>
+                    <div>
+                        <h4 style="color: #6B4423; margin-bottom: 0.5rem;">Time-Bound SLAs</h4>
+                        <p style="color: #666;">Every issue has a deadline based on its priority level</p>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 1rem;">
+                    <div style="color: #FF6B35; font-size: 2rem;">📈</div>
+                    <div>
+                        <h4 style="color: #6B4423; margin-bottom: 0.5rem;">Auto-Escalation</h4>
+                        <p style="color: #666;">Ignored issues automatically escalate to senior officials</p>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 1rem;">
+                    <div style="color: #FF6B35; font-size: 2rem;">📸</div>
+                    <div>
+                        <h4 style="color: #6B4423; margin-bottom: 0.5rem;">Proof Required</h4>
+                        <p style="color: #666;">Authorities must upload photos showing the issue is fixed</p>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 1rem;">
+                    <div style="color: #FF6B35; font-size: 2rem;">✅</div>
+                    <div>
+                        <h4 style="color: #6B4423; margin-bottom: 0.5rem;">Citizen Verification</h4>
+                        <p style="color: #666;">You can accept or reject the resolution</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <h3>☕ Civic Chai</h3>
+                <p>A civic incident management platform that enables citizens to report public issues quickly while automatically prioritizing them based on real-world criticality.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="report.html">Report Issue</a></li>
+                    <li><a href="track.html">Track Status</a></li>
+                    <li><a href="analytics.html">View Analytics</a></li>
+                    <li><a href="mobile.html">Mobile App</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="index.html#how-it-works">How It Works</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="authorities.html">For Authorities</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="security.html">Data Security</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Civic Chai. Built for citizens, designed for action.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
