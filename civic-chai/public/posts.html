@@ -7,6 +7,7 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="posts-styles.css">
 </head>
 
 <body>
@@ -37,10 +38,43 @@
   <p>Support issues, amplify voices, and push for faster resolutions</p>
 </section>
 
+<!-- FILTERS & SORTING (Optional - can be enhanced later) -->
+<section class="filters-section" style="max-width: 800px; margin: 2rem auto; padding: 0 1rem; display: none;">
+  <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+    <select id="filter-priority" style="padding: 0.5rem 1rem; border-radius: 8px; border: 2px solid #E5E7EB;">
+      <option value="">All Priorities</option>
+      <option value="CRITICAL">Critical</option>
+      <option value="HIGH">High</option>
+      <option value="MEDIUM">Medium</option>
+      <option value="LOW">Low</option>
+    </select>
+    
+    <select id="filter-status" style="padding: 0.5rem 1rem; border-radius: 8px; border: 2px solid #E5E7EB;">
+      <option value="">All Status</option>
+      <option value="Pending">Pending</option>
+      <option value="In Progress">In Progress</option>
+      <option value="Resolved">Resolved</option>
+    </select>
+    
+    <select id="sort-by" style="padding: 0.5rem 1rem; border-radius: 8px; border: 2px solid #E5E7EB;">
+      <option value="upvotes">Most Upvoted</option>
+      <option value="recent">Most Recent</option>
+      <option value="comments">Most Discussed</option>
+    </select>
+  </div>
+</section>
+
 <!-- POSTS SECTION -->
 <section class="content-section">
-  <div id="postsContainer"></div>
+  <div id="postsContainer">
+    <div class="loading">Loading posts</div>
+  </div>
 </section>
+
+<!-- SCROLL TO TOP BUTTON -->
+<button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+  ↑
+</button>
 
 <!-- FOOTER -->
 <footer>
@@ -87,5 +121,21 @@
 </footer>
 
 <script src="posts.js"></script>
+<script>
+  // Show scroll to top button
+  window.addEventListener('scroll', () => {
+    const scrollBtn = document.getElementById('scrollTopBtn');
+    if (window.scrollY > 300) {
+      scrollBtn.classList.add('visible');
+    } else {
+      scrollBtn.classList.remove('visible');
+    }
+  });
+  
+  // Mobile menu toggle
+  document.querySelector('.mobile-menu-btn')?.addEventListener('click', function() {
+    document.getElementById('nav-menu')?.classList.toggle('active');
+  });
+</script>
 </body>
 </html>
