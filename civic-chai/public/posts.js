@@ -8,6 +8,7 @@ const mockPosts = [
     _id: "1",
     upvotes: 342,
     likes: 89,
+    views: 1247,
     userUpvoted: false,
     userLiked: false,
     comments: [
@@ -30,6 +31,7 @@ const mockPosts = [
     _id: "2",
     upvotes: 256,
     likes: 67,
+    views: 876,
     userUpvoted: false,
     userLiked: false,
     comments: [
@@ -51,6 +53,7 @@ const mockPosts = [
     _id: "3",
     upvotes: 498,
     likes: 134,
+    views: 2341,
     userUpvoted: false,
     userLiked: false,
     comments: [
@@ -74,6 +77,7 @@ const mockPosts = [
     _id: "4",
     upvotes: 123,
     likes: 45,
+    views: 543,
     userUpvoted: false,
     userLiked: false,
     comments: [],
@@ -93,6 +97,7 @@ const mockPosts = [
     _id: "5",
     upvotes: 567,
     likes: 178,
+    views: 1892,
     userUpvoted: false,
     userLiked: false,
     comments: [
@@ -115,6 +120,7 @@ const mockPosts = [
     _id: "6",
     upvotes: 89,
     likes: 34,
+    views: 423,
     userUpvoted: false,
     userLiked: false,
     comments: [
@@ -136,6 +142,7 @@ const mockPosts = [
     _id: "7",
     upvotes: 234,
     likes: 67,
+    views: 1156,
     userUpvoted: false,
     userLiked: false,
     comments: [
@@ -158,6 +165,7 @@ const mockPosts = [
     _id: "8",
     upvotes: 45,
     likes: 12,
+    views: 287,
     userUpvoted: false,
     userLiked: false,
     comments: [],
@@ -217,6 +225,35 @@ function getStatusClass(status) {
 // Format status text
 function formatStatus(status) {
   return status?.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) || 'Pending';
+}
+
+// Helper functions for icons
+function getPriorityIcon(priority) {
+  const icons = {
+    'CRITICAL': '🔴',
+    'HIGH': '🟠',
+    'MEDIUM': '🟡',
+    'LOW': '🟢',
+    'P1': '🔴',
+    'P2': '🟠',
+    'P3': '🟡',
+    'P4': '🟢'
+  };
+  return icons[priority?.toUpperCase()] || '';
+}
+
+function getStatusIcon(status) {
+  const statusLower = status?.toLowerCase().replace('_', '');
+  const icons = {
+    'pending': '⏳',
+    'inprogress': '⚙️',
+    'resolved': '✅',
+    'escalated': '⚠️',
+    'reported': '⏳',
+    'underreview': '⚙️',
+    'fixed': '✅'
+  };
+  return icons[statusLower] || '';
 }
 
 // Format time ago
@@ -352,8 +389,8 @@ function renderPosts(posts) {
               </div>
             </div>
             <div class="post-badges">
-              ${issue.priority ? `<span class="priority-badge ${getPriorityClass(issue.priority)}">${issue.priority}</span>` : ''}
-              <span class="status-badge ${getStatusClass(issue.status || post.status)}">${formatStatus(issue.status || post.status)}</span>
+              ${issue.priority ? `<span class="priority-badge ${getPriorityClass(issue.priority)}">${getPriorityIcon(issue.priority)} ${issue.priority}</span>` : ''}
+              <span class="status-badge ${getStatusClass(issue.status || post.status)}">${getStatusIcon(issue.status || post.status)} ${formatStatus(issue.status || post.status)}</span>
             </div>
           </div>
         </div>
@@ -389,27 +426,33 @@ function renderPosts(posts) {
 
         <!-- Post Actions -->
         <div class="post-actions">
-          <button class="action-btn ${post.userUpvoted ? 'active' : ''}" onclick="toggleUpvote('${post._id}')">
-            <span class="action-icon">⬆️</span>
-            <span class="action-text">Upvote</span>
-            <span class="action-count">${post.upvotes || 0}</span>
+          <button class="action-btn upvote-btn ${post.userUpvoted ? 'active' : ''}" onclick="toggleUpvote('${post._id}')">
+            <span class="icon">👍</span>
+            <span>Upvote</span>
+            <span class="count">${post.upvotes || 0}</span>
           </button>
           
-          <button class="action-btn" onclick="toggleComments('${post._id}')">
-            <span class="action-icon">💬</span>
-            <span class="action-text">Comment</span>
-            <span class="action-count">${post.comments?.length || 0}</span>
+          <button class="action-btn comment-btn" onclick="toggleComments('${post._id}')">
+            <span class="icon">💬</span>
+            <span>Comment</span>
+            <span class="count">${post.comments?.length || 0}</span>
           </button>
           
-          <button class="action-btn ${post.userLiked ? 'active liked' : ''}" onclick="toggleLike('${post._id}')">
-            <span class="action-icon">${post.userLiked ? '❤️' : '🤍'}</span>
-            <span class="action-text">${post.userLiked ? 'Liked' : 'Like'}</span>
-            <span class="action-count">${post.likes || 0}</span>
+          <button class="action-btn like-btn ${post.userLiked ? 'active' : ''}" onclick="toggleLike('${post._id}')">
+            <span class="icon">${post.userLiked ? '❤️' : '🤍'}</span>
+            <span>${post.userLiked ? 'Liked' : 'Like'}</span>
+            <span class="count">${post.likes || 0}</span>
           </button>
           
-          <button class="action-btn" onclick="sharePost('${post._id}', '${(issue.title || post.title || '').replace(/'/g, "\\'")}')">
-            <span class="action-icon">📤</span>
-            <span class="action-text">Share</span>
+          <button class="action-btn share-btn" onclick="sharePost('${post._id}', '${(issue.title || post.title || '').replace(/'/g, "\\'")}')">
+            <span class="icon">📤</span>
+            <span>Share</span>
+          </button>
+
+          <button class="action-btn views-btn">
+            <span class="icon">👁️</span>
+            <span>Views</span>
+            <span class="count">${post.views || 0}</span>
           </button>
         </div>
 
@@ -437,6 +480,8 @@ function renderPosts(posts) {
             </button>
           </div>
         </div>
+
+        <div class="post-watermark">☕ CIVIC CHAI</div>
       </article>
     `;
   }).join('');
