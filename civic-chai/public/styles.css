@@ -925,3 +925,268 @@ footer {
     background: var(--critical-red);
     color: white;
 }
+
+/* ================================
+   POSTS / SOCIAL FEED STYLES
+   ================================ */
+
+.posts-container {
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+}
+
+.post-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: var(--shadow-soft);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    transition: all 0.3s;
+    border-left: 6px solid var(--chai-orange);
+}
+
+.post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.post-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--chai-dark);
+}
+
+.post-location {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.post-description {
+    margin: 1rem 0;
+    color: var(--text-light);
+    line-height: 1.7;
+}
+
+/* Images grid */
+.post-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.post-images img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.post-images img:hover {
+    transform: scale(1.05);
+}
+
+/* Post actions */
+.post-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.post-btn {
+    background: var(--chai-light);
+    border: 2px solid var(--chai-cream);
+    padding: 0.6rem 1.2rem;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--chai-dark);
+}
+
+.post-btn:hover {
+    background: var(--chai-orange);
+    color: white;
+    border-color: var(--chai-orange);
+}
+
+.post-btn.upvote {
+    border-color: var(--high-orange);
+}
+
+.post-btn.like {
+    border-color: var(--low-green);
+}
+
+.post-btn.comment {
+    border-color: var(--chai-brown);
+}
+
+/* Counts */
+.post-count {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+/* Status badge inside post */
+.post-status {
+    margin-top: 0.75rem;
+}
+
+/* Mobile tweaks */
+@media (max-width: 640px) {
+    .post-card {
+        padding: 1.5rem;
+    }
+
+    .post-title {
+        font-size: 1.25rem;
+    }
+
+    .post-actions {
+        gap: 0.75rem;
+    }
+}
+
+/* ===============================
+   POSTS PAGE (Citizen Feed)
+   =============================== */
+
+#postsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Individual Post Card */
+.post-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow-soft);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* Post Header */
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.post-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--chai-dark);
+}
+
+/* Status Badge */
+.post-status {
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.post-status.REPORTED { background: var(--medium-yellow); color: var(--chai-dark); }
+.post-status.IN_PROGRESS { background: var(--high-orange); color: white; }
+.post-status.RESOLVED { background: var(--low-green); color: white; }
+.post-status.REJECTED { background: var(--critical-red); color: white; }
+
+/* Post Meta */
+.post-meta {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+/* Description */
+.post-description {
+    font-size: 1rem;
+    color: var(--text-dark);
+    margin-bottom: 1.2rem;
+    line-height: 1.7;
+}
+
+/* Images */
+.post-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 1.2rem;
+}
+
+.post-images img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.post-images img:hover {
+    transform: scale(1.05);
+}
+
+/* Action Bar */
+.post-actions {
+    display: flex;
+    gap: 1.5rem;
+    border-top: 1px solid var(--chai-cream);
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+
+.post-action {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--chai-brown);
+    transition: color 0.3s;
+}
+
+.post-action:hover {
+    color: var(--chai-orange);
+}
+
+/* Count Bubble */
+.post-action span {
+    margin-left: 0.4rem;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+/* Watermark */
+.post-watermark {
+    position: absolute;
+    bottom: 1rem;
+    right: 1.5rem;
+    font-size: 0.85rem;
+    color: rgba(107, 68, 35, 0.15);
+    font-weight: 700;
+}
