@@ -32,31 +32,36 @@ const issueSchema = new mongoose.Schema(
 
     status: {
       type: String,
-      enum: ["REPORTED", "IN_PROGRESS", "RESOLVED", "REJECTED"],
+      enum: ["REPORTED", "IN_PROGRESS", "ESCALATED", "RESOLVED", "REJECTED"],
       default: "REPORTED",
     },
 
-    // Anonymous reporting
+    escalationLevel: {
+      type: Number,
+      default: 0,
+    },
+
+    assignedAuthority: {
+      type: String,
+    },
+
+    resolvedAt: {
+      type: Date,
+    },
+
     isAnonymous: {
       type: Boolean,
       default: true,
     },
 
-    // Optional contact for notifications
     contact: {
       type: String,
     },
 
-    // Authority assignment (future)
-    assignedAuthority: {
-      type: String,
-    },
-
-    // AI metadata (future-ready)
-    aiAnalysis: {
-      issueType: String,
-      confidence: Number,
-      duplicateClusterId: String,
+    // 🔮 kept for future (not used now)
+    images: {
+      type: [String],
+      default: [],
     },
   },
   { timestamps: true }
