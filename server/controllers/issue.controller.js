@@ -1,9 +1,22 @@
 const Issue = require("../models/Issue");
+const Post = require("../models/Post");
 
 // 📤 POST /api/issues
 exports.createIssue = async (req, res) => {
+    const Issue = require("../models/Issue");
+const Post = require("../models/Post");
+
+exports.createIssue = async (req, res) => {
   try {
     const issue = await Issue.create(req.body);
+
+    console.log("✅ ISSUE CREATED:", issue._id);
+
+    const post = await Post.create({
+      issue: issue._id,
+    });
+
+    console.log("🔥 POST CREATED:", post._id);
 
     res.status(201).json({
       success: true,
@@ -11,6 +24,33 @@ exports.createIssue = async (req, res) => {
       data: issue,
     });
   } catch (error) {
+    console.error("❌ CREATE ISSUE ERROR:", error);
+
+    res.status(400).json({
+      success: false,
+      message: "Failed to report issue",
+      error: error.message,
+    });
+  }
+};
+
+  try {
+    // 1️⃣ Create Issue
+    const issue = await Issue.create(req.body);
+
+    // 2️⃣ AUTO-CREATE POST (🔥 THIS WAS MISSING EARLIER)
+    await Post.create({
+      issue: issue._id,
+    });
+
+    res.status(201).json({
+      success: true,
+      message: "Issue reported successfully",
+      data: issue,
+    });
+  } catch (error) {
+    console.error("Create Issue Error:", error);
+
     res.status(400).json({
       success: false,
       message: "Failed to report issue",
